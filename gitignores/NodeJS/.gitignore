@@ -1,0 +1,26 @@
+# NodeJS .gitignore file
+
+## Node packages
+node_modules
+**/node_modules/
+build
+npm-debug.log
+
+## Environments
+.env
+.venv
+**/.env
+**/.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+## VSCode Files
+.vscode/
+.devcontainer/
+*.code-workspace
+
+## Misc
+.DS_Store
