@@ -2,7 +2,7 @@
 
 ## Repo Setup
   <details>
-  <summary>Expand</summary>
+  <summary>Create a new repo on the Command Line</summary>
 
   ### Create a new repo on the Command Line
 
@@ -18,7 +18,11 @@
   git remote add origin <your-git-repo-url>
   git push -u origin master
   ```
+  </details>
 
+  <details>
+  <summary>Push an existing repo from the Command Line</summary>
+  
   ### Push an existing repo from the Command Line
 
   ```bash
@@ -28,6 +32,48 @@
   git branch -M master
   git push -u origin master
   ```
+  </details>
+
+  <details>
+  <summary>Connect Remote Repository via SSH</summary>
+
+  ### Connect Remote Repository via SSH
+
+  - Go to the .ssh/ subdirectory: `cd ~/.ssh/`
+  - Check if you have an existing SSH key pair
+  - Ohterwise, continue with the following steps
+    - Generate a ssh key
+      `ssh-keygen -t <SSH Key Types> -C "<comment>"`
+      `ssh key gen`
+
+      For *2048-bit RSA* key:
+      `ssh-keygen -t rsa -b 2048 -C "<comment>"`
+
+      Press `Enter` to set filename(key name) and passphrase (or leave as default)
+
+  - Configure SSH
+    - Attempts to ssh to GitHub 
+      ```
+      eval $(ssh-agent -s)
+
+      // Replace github with your git host
+      ssh -T git@github.com
+      ```
+
+    - Add the SSH private key to the ssh-agent
+      ```bash
+      // Format
+      ssh-add <directory to private SSH key>
+
+      // Example
+      ssh-add ~/.ssh/id_rsa 
+      ```
+
+    - Evaluate the connection: `ssh -T git@github.com`
+
+
+  - Try `git fetch` in your repo and see if passphrase is still needed (if no passphrase was set, then nothing should pop up)
+
   </details>
 
 </br>
@@ -98,6 +144,28 @@
   - Remove the folder from local git tracking<br/>
     - `git rm -r --cached path_to_folder/`
   - Push changes to git repo 
+
+
+## Other Useful tricks
+
+### 1. Cherry-Pick
+
+  `git cherry-pick <commitHash>`\
+  作用：把commit复制到当前分支作为一个新的commit
+  ```text
+  a -> b -> c(HEAD)(master)
+      |
+      -> d -> e(branch B)
+  ```
+  `git cherry-pick <commitHash d>`
+
+  ```text
+  a -> b -> c -> d(HEAD)(master)
+      |
+      -> d -> e(branch B)
+  ```
+  
+  *遇到冲突时可以用`--continue`(处理冲突后继续操作)/ `--abort`(放弃操作)*
 
 [comment]: <> (&nbsp;&nbsp;&nbsp;&nbsp;`git rm -r --cached path_to_folder/`)
   
