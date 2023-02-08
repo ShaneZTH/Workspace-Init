@@ -1,4 +1,4 @@
-# Git Setup and Commands Combination
+# Git Setup and Commands
 
 ## Repo Setup
   <details>
